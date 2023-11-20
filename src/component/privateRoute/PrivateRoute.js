@@ -1,20 +1,14 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-
-const ProtectedRoute = (props) => {
-
-    const { Component } = props;
-    const navigation = useNavigate()
-    useEffect(() => {
-        const login = localStorage.getItem('login')
-        if (!login) {
-            navigation('/login')
-        }
-    })
+import React, { useContext } from 'react';
+import { Outlet, Navigate, useLocation } from 'react-router-dom';
+import { userContext } from '../../App';
+const ProtectedRoute = () => {
+    const location=useLocation();
+    const {user}=useContext(userContext);
     return (
         <div>
-            <Component />
+            {
+                user?<Outlet/>:<Navigate to="/login" replace state={{ prevUrl: location.pathname }}/>
+            }
         </div>
     );
 };
