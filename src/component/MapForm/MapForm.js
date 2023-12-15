@@ -1,68 +1,109 @@
-import React, { useEffect, useState } from 'react';
-import GoogleMap from '../GoogleMap/GoogleMap';
-import persons from '../Image/persons.png'
-import TimeInput from '../Time/Time';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import GoogleMap from "../GoogleMap/GoogleMap";
+import axios from "axios";
 
 const MapForm = () => {
-  const [from, setFrom] = useState('');
-  const [destination, setDestination] = useState('');
+  const navigate = useNavigate();
+  const [from, setFrom] = useState("");
+  const [destination, setDestination] = useState("");
   const [showResult, setShowResult] = useState(false);
+  const [pathDistance, setPathDistance] = useState(0);
+  const [rider, setRider] = useState();
+  const param = useParams();
+  const vehicle = param ? param.vehicle : null;
+  const forSetRider = rider ? rider.length : 0;
+  // const vehicle = param.vehicle;
+  const randomNumber = Math.floor(Math.random() * 20) + 1;
+  const randomNumberForDriver = Math.floor(Math.random() * forSetRider);
+  // const viewRider=rider[randomNumberForDriver];
 
   useEffect(() => {
-
-
-
-    // Handle the response as needed
-    // console.log(response.data);
-    // setShowResult(true); // Show result after form submission
-
-
-
-    // Check if the form has been submitted
-    // if (showResult) {
-    //   fetchData();
-    // }
-  }, [from, destination]);
-
-  const handleSubmit = (event) => {
-    //   axios.post('http://localhost:3001/booking', {
-    //     destinationFrom: from,
-    //     destinationTo: destination,
-    //     timeFrom: '5.6', // Replace with your actual time state
-    //     timeTo: '9.45' // Replace with your actual time state
-    //   });
-
-
-    const postData = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.post('http://localhost:3001/booking', {
-          destinationFrom: from,
-          destinationTo: destination,
-          timeFrom: '5.6', // Replace with your actual time state
-          timeTo: '9.45'
-        });
-        console.log(response.data);
+        const response = await axios.get(`http://localhost:3001/riders/${vehicle}`);
+        setRider(response.data);
       } catch (error) {
-        console.error('Error posting data:', error);
+        console.error("Error fetching riders:", error);
       }
     };
+  
+    fetchData();
+  }, [vehicle]);
+  
+  console.log(rider,randomNumberForDriver,forSetRider)
 
-    postData();
+  const selectedDriver =rider?rider[randomNumberForDriver]:null;
+  let cost = 1;
+  console.log(selectedDriver);
 
-    event.preventDefault();
+  if (vehicle === "car") {
+    cost = 20;
+  } else if (vehicle === "bus") {
+    cost = 10;
+  } else if (vehicle === "bike") {
+    cost = 30;
+  } else if (vehicle === "plane") {
+    cost = 50;
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setPathDistance(randomNumber);
+    } catch (error) {
+      console.error("Error fetching distance:", error);
+    }
     setShowResult(true);
   };
 
+  const handleConfirm = async (e) => {
+    e.preventDefault();
+  
+    // Assuming you have stored the user token in localStorage under the key "userToken"
+    const UserToken = localStorage.getItem("UserToken");
+  console.log()
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/ride/booking",
+        {
+          from: from,
+          to: destination,
+          rider: selectedDriver._id,
+        },
+        {
+          headers: {
+            Authorization: `${UserToken}`,
+          },
+        }
+      );
+  
+      if (response) {
+        console.log(response);
+        navigate("/confirm/thanks");
+      }
+    } catch (error) {
+      console.error("Error confirming ride:", error);
+      // Handle the error as needed
+    }
+  };
+  
+
   return (
     <>
+    <p>hello</p>
       <div className="flex">
-        {/* Left side with form */}
-        <div className={`bg-gray-300 w-1/2 p-6 ${showResult ? 'hidden' : ''}`}>
-          <h2 className="text-xl font-semibold mb-4">Find Your Route</h2>
+        <div className={`bg-gray-300 w-1/2 p-6 ${showResult ? "hidden" : ""}`}>
+          <h2 className="text-xl font-semibold mb-4">
+            You have selected {vehicle.vehicle}
+          </h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label htmlFor="from" className="block text-gray-700 font-medium mb-2">
+              <label
+                htmlFor="from"
+                className="block text-gray-700 font-medium mb-2"
+              >
                 From:
               </label>
               <input
@@ -75,7 +116,10 @@ const MapForm = () => {
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="destination" className="block text-gray-700 font-medium mb-2">
+              <label
+                htmlFor="destination"
+                className="block text-gray-700 font-medium mb-2"
+              >
                 Destination:
               </label>
               <input
@@ -87,7 +131,6 @@ const MapForm = () => {
                 onChange={(e) => setDestination(e.target.value)}
               />
             </div>
-            <TimeInput />
             <button
               type="submit"
               className="bg-blue-500 text-white px-4 py-2 rounded"
@@ -97,55 +140,48 @@ const MapForm = () => {
           </form>
         </div>
 
-        <div className={`m-20 rounded-xl w-1/2 bg-gray-300 p-6 ${showResult ? '' : 'hidden'}`}>
-          <div className='bg-red-400 p-9 rounded-xl'>
-            <h2 className="text-xl font-semibold mb-4">Your Route Information</h2>
-
+        <div
+          className={`m-20 rounded-xl w-1/2 bg-gray-300 p-6 ${
+            showResult ? "" : "hidden"
+          }`}
+        >
+          <div className="bg-red-400 p-9 rounded-xl">
+            <h2 className="text-xl font-semibold mb-4">
+              You have selected {vehicle}
+            </h2>
             <div className="mb-2">
               <strong>From:</strong> {from}
             </div>
             <div className="mb-2">
               <strong>Destination:</strong> {destination}
             </div>
-
+            {showResult && (
+              <>
+                <div className="mb-2">
+                  <strong>Path Distance:</strong> {pathDistance} km
+                </div>
+                <div className="mb-2">
+                  <strong>Cost:</strong> {pathDistance * cost} taka
+                </div>
+                <div className="mb-2">
+                  <strong>Driver:</strong> {selectedDriver.username}
+                </div>
+                <button
+                  className="bg-gray-700 p-2 rounded-2xl mt-8"
+                  onClick={handleConfirm}
+                >
+                  Confirm Ride
+                </button>
+              </>
+            )}
           </div>
-
-          <div className="border-t border-gray-400 pt-4 ">
-            <div className="mb-4 flex bg-slate-200 pl-20 rounded-xl">
-              <strong>Vehicle: Bike</strong>
-              <img className='ml-16' src={persons} alt="" />
-              <div className='ml-8'> 4</div>
-              <div className='ml-20'>$67</div>
-            </div>
-            <div className="mb-4 flex bg-slate-200 pl-20 rounded-xl">
-              <strong>Vehicle: Car</strong>
-              <img className='ml-16' src={persons} alt="" />
-              <div className='ml-8'> 4</div>
-              <div className='ml-20'>$67</div>
-            </div>
-            <div className="mb-4 flex bg-slate-200 pl-20 rounded-xl">
-              <strong>Vehicle: Bike</strong>
-              <img className='ml-16' src={persons} alt="" />
-              <div className='ml-8'> 4</div>
-              <div className='ml-20'>$67</div>
-            </div>
-            <div className="mb-4 flex bg-slate-200 pl-20 rounded-xl">
-              <strong>Vehicle: Airplane</strong>
-              <img className='ml-8' src={persons} alt="" />
-              <div className='ml-8'> 4</div>
-              <div className='ml-20'>$67</div>
-            </div>
-          </div>
-
         </div>
 
-        {/* Right side with map section */}
         <div className="rounded-2xl w-1/2 bg-gray-300 p-6 m-20">
           <GoogleMap />
         </div>
       </div>
     </>
-
   );
 };
 

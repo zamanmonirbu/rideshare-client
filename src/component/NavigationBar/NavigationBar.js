@@ -13,15 +13,16 @@ export default function Header() {
     
     <div class="space-x-4">
       <Link to="/" class="text-white">Home</Link>
-      <Link to="rides" class="text-white">Rides</Link>
-      <Link to="about" class="text-white">About</Link>
-      <Link to="contact" class="text-white">Contact</Link>
+      <Link to="/rider/login" class="text-white">Rider</Link>
+      <Link to="/review" class="text-white">Reviews</Link>
+      <Link to="/blog" class="text-white">Blogs</Link>
+      <Link to="/help" class="text-white">Help</Link>
     </div>
 
     {
     user.photoURL?( <Link to="/user/profile"><img className="w-8 rounded-2xl"  src={user.photoURL} alt="User" /></Link>) :(<div class="space-x-4">
-    <Link to="/login" class="text-white">SignIn</Link>
-    <Link to="/register" class="text-white">SignUp</Link>
+    <Link to="/user/login" class="text-white">SignIn</Link>
+    <Link to="/user/register" class="text-white">SignUp</Link>
   </div>)
     
     }
