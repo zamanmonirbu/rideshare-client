@@ -9,8 +9,6 @@ import Blog from './component/Blog/Blogs';
 import RideOptions from './component/RideOperation/RideOperation';
 import NavigationBar from './component/NavigationBar/NavigationBar'
 import Footer from './component/Footer/Footer';
-// import UserProfile from './component/Profile/UserProfile ';
-import Time from './component/Time/Time';
 import ThankYouMessage from './component/ConfirmRide/ConfirmRide';
 import RiderLoginComponent from './component/RiderAuth/Login';
 import RiderRegistrationComponent from './component/RiderAuth/Registration';
@@ -22,7 +20,7 @@ export const userContext = createContext()
 
 
 function App() {
-  const [user, setUser] = useState('')
+  const [user, setUser] = useState(false)
 
   return (
     <div className="App">
@@ -31,24 +29,22 @@ function App() {
         <Routes>
           <Route path='/' element={<RideOptions />} />
           <Route path='/review' element={<UserReviews />} />
-          <Route path='/rider/login' element={<RiderLoginComponent/>} />
-          <Route path='/rider/register' element={<RiderRegistrationComponent/>} />
-          <Route path='/rider/profile' element={<Rider/>} />
           <Route path='/help' element={<HelpAndUserManual />} />
           <Route path='/blog' element={<Blog />} />
-          <Route path='/time' element={<Time/>} />
-          <Route path='/user/login' element={<Login/>} />
-          <Route path='/user/register' element={<Registration/>} />
-          <Route path='/confirm/thanks' element={<ThankYouMessage/>} />
+          <Route path='/user/login' element={<Login />} />
+          <Route path='/user/register' element={<Registration />} />
+          <Route path='/rider/login' element={<RiderLoginComponent />} />
+          <Route path='/rider/register' element={<RiderRegistrationComponent />} />
           
-          <Route path='/mapView/:vehicle' element={<MapForm />} />
-            <Route path='/user/profile' element={<UserProfile/>} />
           <Route path='/*' element={<PrivateRoute />}>
-            {/* <Route path='mapView' element={<MapForm />} />
-            <Route path='user/profile' element={<UserProfile/>} /> */}
+            <Route path='rider/profile' element={<Rider />} />
+            <Route path='confirm/thanks' element={<ThankYouMessage />} />
+            <Route path='mapView/:vehicle' element={<MapForm />} />
+            <Route path='user/profile' element={<UserProfile />} />
+
           </Route>
         </Routes>
-        <Footer/>
+        <Footer />
       </userContext.Provider>
     </div>
   );

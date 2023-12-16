@@ -13,10 +13,8 @@ const MapForm = () => {
   const param = useParams();
   const vehicle = param ? param.vehicle : null;
   const forSetRider = rider ? rider.length : 0;
-  // const vehicle = param.vehicle;
   const randomNumber = Math.floor(Math.random() * 20) + 1;
   const randomNumberForDriver = Math.floor(Math.random() * forSetRider);
-  // const viewRider=rider[randomNumberForDriver];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,13 +25,13 @@ const MapForm = () => {
         console.error("Error fetching riders:", error);
       }
     };
-  
+
     fetchData();
   }, [vehicle]);
-  
-  console.log(rider,randomNumberForDriver,forSetRider)
 
-  const selectedDriver =rider?rider[randomNumberForDriver]:null;
+  console.log(rider, randomNumberForDriver, forSetRider)
+
+  const selectedDriver = rider ? rider[randomNumberForDriver] : null;
   let cost = 1;
   console.log(selectedDriver);
 
@@ -60,10 +58,10 @@ const MapForm = () => {
 
   const handleConfirm = async (e) => {
     e.preventDefault();
-  
+
     // Assuming you have stored the user token in localStorage under the key "userToken"
     const UserToken = localStorage.getItem("UserToken");
-  console.log()
+    console.log()
     try {
       const response = await axios.post(
         "http://localhost:3001/ride/booking",
@@ -78,21 +76,20 @@ const MapForm = () => {
           },
         }
       );
-  
+
       if (response) {
         console.log(response);
         navigate("/confirm/thanks");
       }
     } catch (error) {
       console.error("Error confirming ride:", error);
-      // Handle the error as needed
     }
   };
-  
+
 
   return (
     <>
-    <p>hello</p>
+      <p>hello</p>
       <div className="flex">
         <div className={`bg-gray-300 w-1/2 p-6 ${showResult ? "hidden" : ""}`}>
           <h2 className="text-xl font-semibold mb-4">
@@ -141,9 +138,8 @@ const MapForm = () => {
         </div>
 
         <div
-          className={`m-20 rounded-xl w-1/2 bg-gray-300 p-6 ${
-            showResult ? "" : "hidden"
-          }`}
+          className={`m-20 rounded-xl w-1/2 bg-gray-300 p-6 ${showResult ? "" : "hidden"
+            }`}
         >
           <div className="bg-red-400 p-9 rounded-xl">
             <h2 className="text-xl font-semibold mb-4">

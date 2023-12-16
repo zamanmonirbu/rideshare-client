@@ -4,10 +4,12 @@ import { userContext } from '../../App';
 const ProtectedRoute = () => {
     const location=useLocation();
     const {user}=useContext(userContext);
+    const auth=localStorage.getItem('UserToken')
+    console.log("Auth",auth,user);
     return (
         <div>
             {
-                user?<Outlet/>:<Navigate to="/login" replace state={{ prevUrl: location.pathname }}/>
+                auth?<Outlet/>:<Navigate to="/user/login" replace state={{ prevUrl: location.pathname }}/>
             }
         </div>
     );

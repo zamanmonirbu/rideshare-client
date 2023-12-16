@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { userContext } from '../../App';
 
 const Login = () => {
+  const { setUser }= useContext(userContext)
   const baseUrl = "http://localhost:3001";
-  const navigate=useNavigate();
+  // const navigate=useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -14,17 +16,20 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    // e.preventDefault()
     try {
       const response = await axios.post(`${baseUrl}/user/login`, formData);
-      // console.log('Login successful. Token:', response.data.token);
-      // You can store the token in local storage or a state management system
       if(response.data.token){
         localStorage.setItem("UserToken",response.data.token);
-        navigate('/user/profile')
+        setUser("true")
+        console.log(response.data.token);
+        
+        // window.location.reload();
+        // navigate('/user/profile')
       }
     } catch (error) {
-      console.error('Login failed. Invalid email or password');
+      console.error('Login failed. Invalid email or password',error);
     }
   };
 
