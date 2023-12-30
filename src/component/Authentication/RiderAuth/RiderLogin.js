@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate} from "react-router-dom";
-
-const RiderLoginComponent = () => {
+import { Link, useLocation, useNavigate} from "react-router-dom";
+import Error from '../../SideEffects/Error'
+const RiderLogin = () => {
+  const [error,setError]=useState(false);
+  const [rider,setRider]=useState()
+  const location=useLocation();
   const navigate=useNavigate();
   const baseUrl = "http://localhost:3001";
   const [formData, setFormData] = useState({
@@ -20,17 +23,29 @@ const RiderLoginComponent = () => {
 
       if(response.data.token){
         localStorage.setItem("riderToken",response.data.token);
-        navigate('/rider/profile')
+        setRider(response.data.token);
       }
     } catch (error) {
       console.error("Login failed. Invalid email or password",error);
+      setError(true)
     }
   };
+
+  useEffect(()=>{
+    if(rider && location?.state?.prevUrl){
+      navigate(location?.state?.prevUrl);
+    }
+    else if(rider && !(location?.state?.prevUrl)){
+      navigate('/')
+    }
+
+  },[rider,navigate,location?.state?.prevUrl])
 
   return (
     <div className="flex items-center justify-center h-screen">
      
       <div className="max-w-md w-full p-6 bg-gray-400 rounded-md shadow-md">
+      {error && <Error/>}
       <h1 className='text-2xl font-sans font-bold pb-10'>Rider Login</h1>
         <label
           className="block mb-2 text-sm font-bold text-gray-700"
@@ -77,4 +92,4 @@ const RiderLoginComponent = () => {
   );
 };
 
-export default RiderLoginComponent;
+export default RiderLogin;

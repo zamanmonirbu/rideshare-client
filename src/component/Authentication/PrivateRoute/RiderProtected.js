@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, Navigate, useLocation } from 'react-router-dom';
-const Protected = () => {
+const RiderProtected = () => {
     const location=useLocation();
     const riderAuth=localStorage.getItem('riderToken')
     return (
@@ -13,4 +13,4 @@ const Protected = () => {
     );
 };
 
-export default Protected;
+export default RiderProtected;

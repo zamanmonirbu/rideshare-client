@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import Error from '../../SideEffects/Error';
 
-const RiderRegistrationComponent = () => {
+const RiderRegistration = () => {
+  const [error,setError]=useState(false)
   const navigate=useNavigate();
   const baseUrl = 'http://localhost:3001';
   const [formData, setFormData] = useState({
@@ -26,6 +28,7 @@ const RiderRegistrationComponent = () => {
       }
     } catch (error) {
       console.error('Registration failed');
+      setError(true)
     }
   };
 
@@ -33,6 +36,7 @@ const RiderRegistrationComponent = () => {
     <div className="flex items-center justify-center my-8">
     
       <div className="max-w-md w-full p-6 bg-gray-400 rounded-md shadow-md">
+      {error && <Error/>}
       <h1 className='text-2xl font-sans font-bold pb-10'>Rider Registration</h1>
         <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="username">
           Username
@@ -106,4 +110,4 @@ const RiderRegistrationComponent = () => {
   );
 };
 
-export default RiderRegistrationComponent;
+export default RiderRegistration;

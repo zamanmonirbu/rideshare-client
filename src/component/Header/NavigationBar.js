@@ -1,16 +1,16 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import userProfile from "../Others/Image/profile.png";
-import riderProfile from "../Others/Image/person.png";
+import userProfile from "../Image/profile.png";
+import riderProfile from "../Image/person.png";
 
 export default function Header() {
   let user = localStorage.getItem("UserToken");
   let rider = localStorage.getItem("riderToken");
   if (user) {
-    rider=localStorage.removeItem("riderToken", null);
+    rider = localStorage.removeItem("riderToken", null);
   }
   if (rider) {
-    user=localStorage.removeItem("UserToken", null);
+    user = localStorage.removeItem("UserToken", null);
   }
 
   const history = useNavigate();
@@ -24,65 +24,62 @@ export default function Header() {
   };
 
   return (
-    <nav className="bg-gray-800 p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <Link to="#" className="text-white text-lg font-bold">
+    <nav className="bg-gray-800 p-4 text-left">
+      <div className="container md:mx-auto sm:flex justify-between items-center">
+        <Link to="#" className="text-white block sm:inline text-lg font-bold">
           Niya Jao
         </Link>
 
-        <div className="space-x-4">
-          <Link to="/" className="text-white">
+        <div className="md:space-x-4">
+          <Link to="/" className="text-white hover:text-black hover:bg-gray-100 block sm:inline p-2  sm:hover:text-white sm:hover:bg-gray-800  ">
             Home
           </Link>
-          {(!user && !rider )? (
-            <Link to="/rider/profile" className="text-white">
+          {!user && !rider ? (
+            <Link to="/rider/profile" className="text-white hover:text-black hover:bg-gray-100 block sm:inline p-2  sm:hover:text-white sm:hover:bg-gray-800 ">
               Rider
             </Link>
-          ): null }
-          <Link to="/review" className="text-white">
+          ) : null}
+          <Link to="/review" className="text-white hover:text-black hover:bg-gray-100 block sm:inline p-2  sm:hover:text-white sm:hover:bg-gray-800 ">
             Reviews
           </Link>
-          <Link to="/blog" className="text-white">
+          <Link to="/blog" className="text-white hover:text-black hover:bg-gray-100 block sm:inline p-2  sm:hover:text-white sm:hover:bg-gray-800 ">
             Blogs
           </Link>
-          <Link to="/help" className="text-white">
+          <Link to="/help" className="text-white hover:text-black hover:bg-gray-100 block sm:inline p-2  sm:hover:text-white sm:hover:bg-gray-800 ">
             Help
           </Link>
         </div>
-        
 
-        {(user )? (
-          <div className="flex items-center space-x-4">
+        {user ? (
+          <div className="sm:flex items-center sm:space-x-4">
             <Link to="/user/profile">
-              <img className="w-8 rounded-2xl" src={userProfile} alt="User" />
+              <img className="w-8 rounded-2xl block sm:inline" src={userProfile} alt="User" />
             </Link>
-            <button className="text-white" onClick={handleLogout}>
+            <button className="text-white hover:text-black hover:bg-gray-100 block sm:inline p-2  sm:hover:text-white sm:hover:bg-gray-800 " onClick={handleLogout}>
               Logout
             </button>
           </div>
-        ) :null}
+        ) : null}
         {rider ? (
-          <div className="flex items-center space-x-4">
+          <div className="sm:flex items-center sm:space-x-4">
             <Link to="/rider/profile">
-              <img className="w-8 rounded-2xl" src={riderProfile} alt="User" />
+              <img className="w-8 rounded-2xl block sm:inline" src={riderProfile} alt="User" />
             </Link>
-            <button className="text-white" onClick={handleRiderLogout}>
+            <button className="text-white hover:text-black hover:bg-gray-100 block sm:inline p-2  sm:hover:text-white sm:hover:bg-gray-800 " onClick={handleRiderLogout}>
               Logout
             </button>
           </div>
-        ) :null}
-        {
-          (!user&&!rider)? (
-          <div className="space-x-4">
-            <Link to="/user/login" className="text-white">
+        ) : null}
+        {!user && !rider ? (
+          <div className="md:space-x-4">
+            <Link to="/user/login" className="text-white hover:text-black hover:bg-gray-100 block sm:inline p-2  sm:hover:text-white sm:hover:bg-gray-800 ">
               SignIn
             </Link>
-            <Link to="/user/register" className="text-white">
+            <Link to="/user/register" className="text-white hover:text-black hover:bg-gray-100 block sm:inline p-2  sm:hover:text-white sm:hover:bg-gray-800 ">
               SignUp
             </Link>
           </div>
-        ):null
-        }
+        ) : null}
       </div>
     </nav>
   );

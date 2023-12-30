@@ -1,23 +1,25 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import PrivateRoute from "./component/Authentication/privateRoute/PrivateRoute";
-import MapForm from "./component/UserContent/MapForm/MapForm";
-import UserReviews from "./component/UserContent/UserReviews/UserReviews";
-import HelpAndUserManual from "./component/Others/Help/HelpAndUserManual";
-import Blog from "./component/Others/Blog/Blogs";
-import RideOptions from "./component/UserContent/RideOperation/RideOperation";
+import MapForm from "./Screen/MapForm";
+import UserReviews from "./Screen/UserReviews";
+import HelpAndUserManual from "./component/HelpAndUserManual";
+import Blog from "./component/Blogs";
+import RideOptions from "./Screen/RideOperation";
 import NavigationBar from "./component/Header/NavigationBar";
 import Footer from "./component/Footer/Footer";
-import ThankYouMessage from "./component/UserContent/ConfirmRide/ConfirmRide";
-import RiderLoginComponent from "./component/Authentication/RiderAuth/Login";
-import RiderRegistrationComponent from "./component/Authentication/RiderAuth/Registration";
-import Registration from "./component/Authentication/UserAuth/Registration";
-import Login from "./component/Authentication/UserAuth/Login";
-import Rider from "./component/RiderContent/Rider/Rider";
-import UserProfile from "./component/UserContent/UserProfile/UserProfile";
-import Protected from "./component/Authentication/privateRoute/Protected";
-import NotFound from "./component/Others/NotFound/NotFound";
-import Privacy from "./component/Others/Privacy/Privacy";
+import ThankYouMessage from "./Screen/ConfirmRide";
+import RiderLogin from "./component/Authentication/RiderAuth/RiderLogin";
+import RiderRegistration from "./component/Authentication/RiderAuth/RiderRegistration";
+import Registration from "./component/Authentication/UserAuth/UserRegistration";
+import Login from "./component/Authentication/UserAuth/UserLogin";
+import RiderProfile from "./Screen/RiderProfile";
+import UserProfile from "./Screen/UserProfile";
+import NotFound from "./component/NotFound";
+import Privacy from "./component/Privacy";
+import UserProtected from "./component/Authentication/PrivateRoute/UserProtected";
+import RiderProtected from "./component/Authentication/PrivateRoute/RiderProtected";
+import HelpMoreDetails from "./component/HelpMoreDetails";
+
 
 function App() {
   return (
@@ -28,20 +30,18 @@ function App() {
         <Route path="/review" element={<UserReviews />} />
         <Route path="/help" element={<HelpAndUserManual />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/view/help/more" element={<HelpMoreDetails/>} />
         <Route path="/policy" element={<Privacy/>} />
         <Route path="/user/login" element={<Login />} />
         <Route path="/user/register" element={<Registration />} />
-        <Route path="/rider/login" element={<RiderLoginComponent />} />
-        <Route
-          path="/rider/register"
-          element={<RiderRegistrationComponent />}
-        />
+        <Route path="/rider/login" element={<RiderLogin />} />
+        <Route path="/rider/register" element={<RiderRegistration />}/>
 
-        <Route path="/rider/profile" element={<Protected/>}>
-          <Route path="" element={<Rider />} />
+        <Route path="/rider/profile" element={<RiderProtected/>}>
+        <Route index element={<RiderProfile/>} />
         </Route>
 
-        <Route path="/" element={<PrivateRoute />}>
+        <Route path="/" element={<UserProtected/>}>
           <Route path="confirm/thanks" element={<ThankYouMessage />} />
           <Route path="mapView/:vehicle" element={<MapForm />} />
           <Route path="user/profile" element={<UserProfile />} />

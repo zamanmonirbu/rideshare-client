@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UserData = () => {
+const Loading = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const UserData = () => {
     );
 };
 
-export default UserData;
+export default Loading;

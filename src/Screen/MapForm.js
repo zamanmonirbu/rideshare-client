@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import GoogleMap from "../../Others/GoogleMap/GoogleMap";
+import GoogleMap from "../component/GoogleMap";
 import axios from "axios";
 
 const MapForm = () => {
@@ -19,7 +19,9 @@ const MapForm = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/riders/${vehicle}`);
+        const response = await axios.get(
+          `http://localhost:3001/riders/${vehicle}`
+        );
         setRider(response.data);
       } catch (error) {
         console.error("Error fetching riders:", error);
@@ -54,7 +56,7 @@ const MapForm = () => {
   const handleConfirm = async (e) => {
     e.preventDefault();
     const UserToken = localStorage.getItem("UserToken");
-    console.log()
+    console.log();
     try {
       const response = await axios.post(
         "http://localhost:3001/ride/booking",
@@ -78,10 +80,9 @@ const MapForm = () => {
     }
   };
 
-
   return (
     <>
-      <div className="flex">
+      <div className="md:flex">
         <div className={`bg-gray-300 w-1/2 p-6 ${showResult ? "hidden" : ""}`}>
           <h2 className="text-xl font-semibold mb-4">
             You have selected {vehicle.vehicle}
@@ -121,7 +122,7 @@ const MapForm = () => {
             </div>
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded"
+              className="bg-emerald-500 text-white px-4 py-2 rounded"
             >
               Find Route
             </button>
@@ -129,42 +130,54 @@ const MapForm = () => {
         </div>
 
         <div
-          className={`m-20 rounded-xl w-1/2 bg-gray-300 p-6 ${showResult ? "" : "hidden"
-            }`}
+          className={`m-20 rounded-xl w-1/2 bg-gray-300 p-6 ${
+            showResult ? "" : "hidden"
+          }`}
         >
-          <div className="bg-red-400 p-9 rounded-xl">
-            <h2 className="text-xl font-semibold mb-4">
-              You have selected {vehicle}
-            </h2>
-            <div className="mb-2">
-              <strong>From:</strong> {from}
-            </div>
-            <div className="mb-2">
-              <strong>Destination:</strong> {destination}
-            </div>
-            {showResult && (
-              <>
-                <div className="mb-2">
-                  <strong>Path Distance:</strong> {pathDistance} km
-                </div>
-                <div className="mb-2">
-                  <strong>Cost:</strong> {pathDistance * cost} taka
-                </div>
-                <div className="mb-2">
-                  <strong>Driver:</strong> {selectedDriver.username}
-                </div>
-                <button
-                  className="bg-gray-700 p-2 rounded-2xl mt-8"
-                  onClick={handleConfirm}
-                >
-                  Confirm Ride
-                </button>
-              </>
-            )}
-          </div>
+           <div className="p-9 rounded-xl border border-emerald-500">
+      <h2 className="text-xl font-semibold mb-4 capitalize">
+        You have selected {vehicle}
+      </h2>
+      <table className="table-auto w-full mb-4  text-left">
+        <tbody>
+          <tr>
+            <td className="pr-4 border-b border-emerald-500"><strong>From:</strong></td>
+            <td className="border-b border-emerald-500">{from}</td>
+          </tr>
+          <tr>
+            <td className="pr-4 border-b border-emerald-500"><strong>Destination:</strong></td>
+            <td className="border-b border-emerald-500">{destination}</td>
+          </tr>
+          {showResult && (
+            <>
+              <tr>
+                <td className="pr-4 border-b border-emerald-500"><strong>Path Distance:</strong></td>
+                <td className="border-b border-emerald-500">{pathDistance} km</td>
+              </tr>
+              <tr>
+                <td className="pr-4 border-b border-emerald-500"><strong>Cost:</strong></td>
+                <td className="border-b border-emerald-500">{pathDistance * cost} taka</td>
+              </tr>
+              <tr>
+                <td className="pr-4 border-b border-emerald-500"><strong>Driver:</strong></td>
+                <td className="border-b border-emerald-500">{selectedDriver.username}</td>
+              </tr>
+            </>
+          )}
+        </tbody>
+      </table>
+      {showResult && (
+        <button
+          className="bg-emerald-500 p-2 rounded-xl mt-8 text-white"
+          onClick={handleConfirm}
+        >
+          Confirm Ride
+        </button>
+      )}
+    </div>
         </div>
 
-        <div className="rounded-2xl w-1/2 bg-gray-300 p-6 m-20">
+        <div className="rounded-2xl w-1/2 p-6 flex items-center justify-center">
           <GoogleMap />
         </div>
       </div>
