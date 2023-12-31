@@ -20,7 +20,7 @@ const MapForm = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/riders/${vehicle}`
+          `https://ride-share-monir.onrender.com/riders/${vehicle}`
         );
         setRider(response.data);
       } catch (error) {
@@ -59,7 +59,7 @@ const MapForm = () => {
     console.log();
     try {
       const response = await axios.post(
-        "http://localhost:3001/ride/booking",
+        "https://ride-share-monir.onrender.com/ride/booking",
         {
           from: from,
           to: destination,

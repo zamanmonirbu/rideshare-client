@@ -9,7 +9,7 @@ const UserProfile = () => {
     const fetchProfileData = async () => {
       try {
         const userToken = localStorage.getItem('UserToken');
-        const response = await axios.get('http://localhost:3001/my/bookings', {
+        const response = await axios.get('https://ride-share-monir.onrender.com/my/bookings', {
           headers: {
             Authorization: `${userToken}`,
           },

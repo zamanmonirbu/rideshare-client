@@ -5,7 +5,7 @@ import Error from '../../SideEffects/Error';
 
 const Registration = () => {
   const [error,setError]=useState(false)
-  const baseUrl = "http://localhost:3001";
+  const baseUrl = "https://ride-share-monir.onrender.com";
   const navigate=useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -31,7 +31,7 @@ const Registration = () => {
   };
 
   return (
-    <div className="flex items-center justify-center ">
+    <div className="flex items-center justify-center my-8">
       
       <div className="max-w-md w-full p-6 bg-gray-400 rounded-md shadow-md my-10">
       {error && <Error/>}

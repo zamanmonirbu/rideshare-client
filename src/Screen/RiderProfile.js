@@ -9,7 +9,7 @@ const Rider = () => {
     const fetchProfileData = async () => {
       try {
         const riderToken = localStorage.getItem('riderToken');
-        const response = await axios.get('http://localhost:3001/rider', {
+        const response = await axios.get('https://ride-share-monir.onrender.com/rider', {
           headers: {
             Authorization: `${riderToken}`,
           },

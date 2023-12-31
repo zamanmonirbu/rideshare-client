@@ -8,7 +8,7 @@ const Login = () => {
 const [user,setUser]=useState();
 const location=useLocation();
   const navigate=useNavigate();
-  const baseUrl = "http://localhost:3001";
+  const baseUrl = "https://ride-share-monir.onrender.com";
   const [formData, setFormData] = useState({
     email: '', 
     password: '',
@@ -42,7 +42,7 @@ const location=useLocation();
   },[user,navigate,location?.state?.prevUrl])
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-screen my-8">
    
       <div className="max-w-md w-full p-6 bg-gray-400 rounded-md shadow-md">
       {error && <Error/>}

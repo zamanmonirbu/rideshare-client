@@ -6,7 +6,7 @@ import Error from '../../SideEffects/Error';
 const RiderRegistration = () => {
   const [error,setError]=useState(false)
   const navigate=useNavigate();
-  const baseUrl = 'http://localhost:3001';
+  const baseUrl = 'https://ride-share-monir.onrender.com';
   const [formData, setFormData] = useState({
     username: '',
     email: '',
