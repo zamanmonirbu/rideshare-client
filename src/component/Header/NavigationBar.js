@@ -27,7 +27,7 @@ export default function Header() {
     <nav className="bg-gray-800 p-4 text-left">
       <div className="container md:mx-auto sm:flex justify-between items-center">
         <Link to="#" className="text-white block sm:inline text-lg font-bold">
-          Niya Jao
+          Niye Jao
         </Link>
 
         <div className="md:space-x-4">
