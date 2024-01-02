@@ -1,72 +1,53 @@
-# Getting Started with Create React App
+# Niye Jao Ride Sharing Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Niye Jao is a ride-sharing platform that offers users the option to share rides via car, bus, bike, or plane. Users can select their preferred mode of transportation, authenticate themselves, input their travel details, and receive information about the distance, amount, and driver for their trip.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+1. **Vehicle Options**: Users can choose from various transportation options, including car, bus, bike, and plane.
+2. **User Authentication**: Secure authentication process for users and riders.
+3. **Travel Details Input**: Users input their starting location and destination to get information about distance, amount, and driver details.
+4. **Rider Profiles**: Riders can create profiles with their vehicle name and personal information.
+5. **Trip Completion**: Both users and riders can mark their trips as completed in their respective profiles.
 
-### `npm start`
+## User Authentication
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Two types of logins: User and Rider.
+- Users need to authenticate to use the platform and book rides.
+- Riders create profiles with their vehicle information.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technology Stack
 
-### `npm test`
+- Frontend: React js, Tailwind CSS
+- Backend: Node js
+- Database: MongoDB
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Visit the live application: [Live Server Link](https://ridesharebd.netlify.app/)
 
-### `npm run build`
+## Backend Code
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Github: [Code Link](https://github.com/zamanmonirbu/rideshare-backend)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## How to Use
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Visit the index page and select your preferred mode of transportation.
+2. Authenticate yourself (user login or rider profile creation).
+3. Input your travel details and receive information about your trip.
+4. Confirm your ride and proceed to the welcome page for ride sharing.
 
-### `npm run eject`
+## Rider Profiles
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Riders create profiles with vehicle names and personal information.
+- Riders can mark their trips as completed in their profiles.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Contributing
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Feel free to contribute to the development of Niye Jao. Create a fork, make your changes, and submit a pull request!
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Social Links
 
-## Learn More
+Connect with me:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-"# ride-share" 
-# ride-share-with-authentication
+- [LinkedIn](www.linkedin.com/in/mdmoniruzzamanbu)
+- [Netlify](https://moniruzzamanbu.netlify.app/)
+- [Medium](https://medium.com/@zamanmonirbu)
