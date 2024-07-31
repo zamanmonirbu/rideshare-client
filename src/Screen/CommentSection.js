@@ -11,7 +11,7 @@ const CommentSection = () => {
   useEffect(() => {
     fetchComments();
   }, []);
-
+//JUSTING FOR
   const fetchComments = async () => {
     try {
       const response = await axios.get(`${baseUrl}/comment/`);
